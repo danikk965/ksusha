@@ -5,86 +5,78 @@
   <title>Анимированное сердце</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Сброс стилей и базовая настройка */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* Базовые стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html,
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      color: white;
-      background-color: #000;
-      background-repeat: no-repeat;
-      font-family: 'Marck Script', cursive, sans-serif;
-    }
+html, body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh; /* Используем 100vh вместо 100% */
+  overflow: hidden;
+  color: white;
+  background-color: #000;
+  background-repeat: no-repeat;
+  font-family: 'Marck Script', cursive, sans-serif;
+  text-align: center;
+}
 
-    .title {
-      font-size: 5em;
-    }
+/* Заголовок */
+.title {
+  font-size: 4em; /* Уменьшаем размер */
+}
 
-    .c-heart {
-      position: absolute;
-      width: 300px;
-      height: 400px;
-      opacity: 1;
-    }
-    [loaded] .c-heart {
-      position: relative;
-    }
+/* Сердце */
+.c-heart {
+  position: absolute;
+  width: 80vw; /* Адаптивная ширина */
+  max-width: 300px; /* Ограничиваем максимальный размер */
+  height: auto; /* Автоматическая высота */
+  opacity: 1;
+}
+[loaded] .c-heart {
+  position: relative;
+}
 
-    .c-heart::before {
-      content: '';
-    }
+/* Альтернативное сердце */
+.c-heart-alt {
+  font-size: 6em; /* Уменьшаем размер */
+  color: #ff7171;
+  margin: 0 0.2em;
+}
+[loaded] .c-heart-alt {
+  display: none;
+}
 
-    .c-heart-alt {
-      font-size: 8em;
-      color: #ff7171;
-      margin: 0 0.2em;
-    }
-    [loaded] .c-heart-alt {
-      display: none;
-    }
-
-    .shadow {
-      position: relative;
-    }
-    .shadow::before,
-    .shadow::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      height: 100%;
-      width: 15%;
-      z-index: 2;
-    }
-    .shadow::before {
-      left: 0;
-      background: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
-    }
-    .shadow::after {
-      right: 0;
-      background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
-    }
+/* Адаптация для маленьких экранов */
+@media (max-width: 480px) {
+  .title {
+    font-size: 3em;
+  }
+  .c-heart {
+    width: 60vw;
+  }
+  .c-heart-alt {
+    font-size: 5em;
+  }
+}
   </style>
 </head>
 
 <body>
   <!-- Заголовки и контейнер для сердца -->
-  <span class="title">C наступающим</span>
+  <span class="title">C</span>
   <div class="shadow">
     <canvas class="c-heart" data-canvas="heart">8</canvas>
     <span class="c-heart-alt">8</span>
   </div>
-  <span class="title">мартом Ксюша!</span>
+  <span class="title">Марта</span>
 
   <script>
     // Класс для рендеринга анимации сердца с помощью WebGL
@@ -401,4 +393,4 @@
     `;
   </script>
 </body>
-</html>
+  </html>
