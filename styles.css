@@ -18,7 +18,7 @@ html, body {
   font-family: 'Marck Script', cursive, sans-serif;
 }
 
-/* Класс для анимации плавного появления */
+/* Класс для анимации появления сверху вниз */
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
@@ -27,9 +27,11 @@ html, body {
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(-20px); /* Элементы начинают выше на 20px */
   }
   to {
     opacity: 1;
+    transform: translateY(0); /* Элементы опускаются на место */
   }
 }
 
@@ -42,11 +44,11 @@ html, body {
 }
 
 .title:first-child {
-  animation-delay: 0.5s;
+  animation-delay: 0.5s; /* Верхний текст появляется первым */
 }
 
 .title:last-child {
-  animation-delay: 1.5s;
+  animation-delay: 1.5s; /* Нижний текст появляется последним */
 }
 
 /* Стили для сердца */
@@ -56,7 +58,7 @@ html, body {
   height: 53.33vw;
   max-width: 250px;
   max-height: 333px;
-  animation-delay: 1s;
+  animation-delay: 1s; /* Сердце появляется вторым */
 }
 
 /* Стили для тени */
@@ -109,16 +111,5 @@ html, body {
   .c-heart {
     width: 30vw;
     height: 40vw;
-  }
-}
-
-@media (max-width: 360px) {
-  .title {
-    font-size: 12vw;
-    margin-bottom: 5vw;
-  }
-  .c-heart {
-    width: 25vw;
-    height: 33.33vw;
   }
 }
