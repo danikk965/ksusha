@@ -19,14 +19,16 @@ html, body {
 }
 
 .title {
-  font-size: 6vw; /* Базовый размер шрифта для адаптивности */
+  font-size: 6vw; /* Базовый размер шрифта */
   text-align: center;
-  padding: 5vw; /* Отступы для мобильных */
+  margin-bottom: 2vw; /* Отступ снизу вместо padding */
+  word-wrap: break-word; /* Предотвращаем выход текста за пределы */
+  max-font-size: 48px; /* Ограничение максимального размера */
 }
 
 .c-heart {
   position: relative;
-  width: 40vw; /* Уменьшенный размер сердца */
+  width: 40vw; /* Базовый размер сердца */
   height: 53.33vw; /* Пропорциональная высота */
   max-width: 250px; /* Ограничение для больших экранов */
   max-height: 333px;
@@ -37,6 +39,7 @@ html, body {
   font-size: 8em;
   color: #ff7171;
   margin: 0 0.2em;
+  display: none; /* Скрыт по умолчанию */
 }
 [loaded] .c-heart-alt {
   display: none;
@@ -48,7 +51,7 @@ html, body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 5vw; /* Дополнительные отступы */
+  padding: 2vw; /* Уменьшенный padding */
 }
 .shadow::before,
 .shadow::after {
@@ -71,34 +74,48 @@ html, body {
 /* Медиа-запросы для телефонов */
 @media (max-width: 768px) {
   .title {
-    font-size: 8vw; /* Увеличенный шрифт для планшетов */
+    font-size: 8vw;
+    margin-bottom: 3vw;
   }
   .c-heart {
-    width: 35vw; /* Уменьшаем сердце */
+    width: 35vw;
     height: 46.67vw;
+  }
+  .shadow {
+    padding: 3vw;
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 10vw; /* Ещё больше шрифт для маленьких экранов */
-    padding: 8vw; /* Увеличенные отступы */
+    font-size: 10vw;
+    margin-bottom: 4vw;
   }
   .c-heart {
-    width: 30vw; /* Ещё меньше сердце */
+    width: 30vw;
     height: 40vw;
   }
   .shadow {
-    padding: 8vw; /* Больше пространства вокруг сердца */
+    padding: 4vw;
+  }
+  .c-heart-alt {
+    font-size: 6em; /* Уменьшаем для маленьких экранов */
   }
 }
 
 @media (max-width: 360px) {
   .title {
-    font-size: 12vw; /* Максимальный размер для очень маленьких экранов */
+    font-size: 12vw;
+    margin-bottom: 5vw;
   }
   .c-heart {
     width: 25vw;
     height: 33.33vw;
+  }
+  .shadow {
+    padding: 5vw;
+  }
+  .c-heart-alt {
+    font-size: 5em; /* Ещё меньше для самых маленьких экранов */
   }
 }
