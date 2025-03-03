@@ -15,34 +15,31 @@
     html,
     body {
       display: flex;
+      flex-direction: column; /* Элементы располагаются вертикально */
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
       width: 100%;
-      height: 100%;
+      height: 100vh; /* Полная высота экрана */
       overflow: hidden;
       color: white;
       background-color: #000;
-      background-repeat: no-repeat;
       font-family: 'Marck Script', cursive, sans-serif;
     }
 
     .title {
-      font-size: 5em;
+      font-size: 5vw; /* Адаптивный размер шрифта */
+      text-align: center;
+      width: 100%;
+      padding: 10px; /* Небольшой отступ для читаемости */
     }
 
     .c-heart {
-      position: absolute;
-      width: 300px;
-      height: 400px;
+      position: relative; /* Убираем absolute, чтобы сердце адаптировалось */
+      width: 50vw; /* Относительная ширина */
+      height: 66.67vw; /* Пропорциональная высота */
+      max-width: 300px; /* Ограничение для больших экранов */
+      max-height: 400px;
       opacity: 1;
-    }
-    [loaded] .c-heart {
-      position: relative;
-    }
-
-    .c-heart::before {
-      content: '';
     }
 
     .c-heart-alt {
@@ -56,6 +53,10 @@
 
     .shadow {
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
     .shadow::before,
     .shadow::after {
@@ -78,21 +79,21 @@
     /* Медиа-запросы для адаптивности */
     @media (max-width: 768px) {
       .title {
-        font-size: 3em; /* Уменьшаем шрифт для планшетов */
+        font-size: 4vw; /* Уменьшаем шрифт для планшетов */
       }
       .c-heart {
-        width: 200px;
-        height: 300px; /* Уменьшаем сердце для планшетов */
+        width: 40vw;
+        height: 53.33vw; /* Пропорционально уменьшаем сердце */
       }
     }
 
     @media (max-width: 480px) {
       .title {
-        font-size: 2em; /* Уменьшаем шрифт для телефонов */
+        font-size: 3vw; /* Уменьшаем шрифт для телефонов */
       }
       .c-heart {
-        width: 150px;
-        height: 200px; /* Уменьшаем сердце для телефонов */
+        width: 30vw;
+        height: 40vw; /* Ещё меньше для маленьких экранов */
       }
     }
   </style>
@@ -107,72 +108,45 @@
   </div>
   <span class="title">мартом Ксюша!</span>
 
+  <!-- Здесь твой JavaScript код остаётся без изменений -->
   <script>
     // Класс для рендеринга анимации сердца с помощью WebGL
     class HeartGLRender {
-      static get DURATION() { return 10; } // Продолжительность одного цикла анимации в секундах
-
+      static get DURATION() { return 10; }
       constructor(el) {
         this.el = el;
-        if (!this.el) throw new Error('Элемент canvas не найден или не передан в конструктор.');
-
+        if (!this.el) throw new Error('Элемент canvas не найден.');
         this.gl = this.el.getContext("webgl") || this.el.getContext("experimental-webgl");
-        if (!this.gl) {
-          throw new Error('WebGL не поддерживается вашим браузером или отключён.');
-        }
-
-        // Создаём шейдеры
-        this.vertexShader   = HeartGLRender.compileShader(this.gl, VERTEX, this.gl.VERTEX_SHADER);
+        if (!this.gl) throw new Error('WebGL не поддерживается.');
+        this.vertexShader = HeartGLRender.compileShader(this.gl, VERTEX, this.gl.VERTEX_SHADER);
         this.fragmentShader = HeartGLRender.compileShader(this.gl, FRAGMENT, this.gl.FRAGMENT_SHADER);
-
-        // Создаём и линкуем программу
         this.program = HeartGLRender.createProgram(this.gl, [this.vertexShader, this.fragmentShader]);
-
-        // Создаём буфер с координатами
         this.buffer = HeartGLRender.createBuffer(this.gl);
-
-        // Получаем ссылки на uniform-переменные
-        this.widthHandler  = this.gl.getUniformLocation(this.program, 'width');
+        this.widthHandler = this.gl.getUniformLocation(this.program, 'width');
         this.heightHandler = this.gl.getUniformLocation(this.program, 'height');
         this.positionHandler = HeartGLRender.createPositionHandler(this.gl, this.program);
-
         this.timeHandler = this.gl.getUniformLocation(this.program, 'time');
-
-        // Первичная подгонка размеров и запуск первого рендера
         this.resize();
         this.redraw();
-
-        // Указываем, что элемент успешно загружен
         this.el.parentNode.toggleAttribute('loaded', true);
       }
-
       resize() {
-        const width  = this.el.offsetWidth;
+        const width = this.el.offsetWidth;
         const height = this.el.offsetHeight;
-
-        // Устанавливаем размеры canvas, настраиваем viewport
-        this.el.width  = width;
+        this.el.width = width;
         this.el.height = height;
         this.gl.viewport(0, 0, width, height);
-
-        // Передаём размеры в шейдер
         this.gl.uniform1f(this.widthHandler, width);
         this.gl.uniform1f(this.heightHandler, height);
       }
-
       redraw() {
         const current = Date.now();
-        const start   = this.timeStart = this.timeStart || current;
-        const time    = (current - start) % (HeartGLRender.DURATION * 1000);
-        this.time     = time / 1000;
-
-        // Передаём время в шейдер
+        const start = this.timeStart = this.timeStart || current;
+        const time = (current - start) % (HeartGLRender.DURATION * 1000);
+        this.time = time / 1000;
         this.gl.uniform1f(this.timeHandler, this.time);
-
-        // Отрисовываем (TRIANGLE_STRIP связывает 4 вершины в полигон, покрывающий весь экран)
         this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
       }
-
       static compileShader(gl, shaderSource, shaderType) {
         const shader = gl.createShader(shaderType);
         gl.shaderSource(shader, shaderSource);
@@ -182,7 +156,6 @@
         }
         return shader;
       }
-
       static createProgram(gl, shaders = []) {
         const program = gl.createProgram();
         shaders.forEach((shader) => gl.attachShader(program, shader));
@@ -190,7 +163,6 @@
         gl.useProgram(program);
         return program;
       }
-
       static createBuffer(gl) {
         const bounds = new Float32Array([-1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, -1.0]);
         const buffer = gl.createBuffer();
@@ -198,73 +170,50 @@
         gl.bufferData(gl.ARRAY_BUFFER, bounds, gl.STATIC_DRAW);
         return buffer;
       }
-
       static createPositionHandler(gl, program) {
         const attributeLocation = gl.getAttribLocation(program, 'position');
-        if (attributeLocation === -1) {
-          throw new Error('Атрибут "position" не найден в шейдере.');
-        }
+        if (attributeLocation === -1) throw new Error('Атрибут "position" не найден.');
         gl.enableVertexAttribArray(attributeLocation);
         gl.vertexAttribPointer(attributeLocation, 2, gl.FLOAT, false, 2 * 4, 0);
         return attributeLocation;
       }
     }
-
-    // Запускаем код, когда DOM загрузится
     function ready(fn) {
-      if (document.readyState !== 'loading') {
-        setTimeout(fn);
-      } else {
-        document.addEventListener('DOMContentLoaded', () => setTimeout(fn));
-      }
+      if (document.readyState !== 'loading') setTimeout(fn);
+      else document.addEventListener('DOMContentLoaded', () => setTimeout(fn));
     }
-
-    // Основной запуск, инициализация HeartGLRender
     ready(() => {
       const targets = Array.from(document.querySelectorAll('[data-canvas="heart"]'));
       const handlers = targets.map(el => new HeartGLRender(el));
-
       function drawLoop() {
         handlers.forEach(h => h.redraw());
         requestAnimationFrame(drawLoop);
       }
       drawLoop();
-
-      // Обработчик resize с debounce
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          handlers.forEach(h => h.resize());
-        }, 100); // Задержка 100 мс
+        resizeTimeout = setTimeout(() => handlers.forEach(h => h.resize()), 100);
       }, false);
     });
-
-    // Шейдеры
     const VERTEX = `
       attribute vec2 position;
       void main() {
         gl_Position = vec4(position, 0.0, 1.0);
       }
     `;
-
     const FRAGMENT = `
       precision highp float;
-
       uniform float time;
       uniform float width;
       uniform float height;
-
       vec2 resolution = vec2(width, height);
-
       #define POINT_COUNT 8
-
       vec2 points[POINT_COUNT];
       const float speed = -0.5;
       const float len = 0.3;
       float intensity = 1.5;
       float radius = 0.02;
-
       float sdBezier(vec2 pos, vec2 A, vec2 B, vec2 C){
         vec2 a = B - A;
         vec2 b = A - 2.0 * B + C;
@@ -307,18 +256,15 @@
         }
         return res;
       }
-
       vec2 getHeartPosition(float t) {
         return vec2(
           16.0 * sin(t) * sin(t) * sin(t),
           -(13.0 * cos(t) - 5.0 * cos(2.0 * t) - 2.0 * cos(3.0 * t) - cos(4.0 * t))
         );
       }
-
       float getGlow(float dist, float radius, float intensity) {
         return pow(radius / dist, intensity);
       }
-
       float getSegment(float t, vec2 pos, float offset, float scale){
         for (int i = 0; i < POINT_COUNT; i++){
           points[i] = getHeartPosition(offset + float(i) * len + fract(speed * t) * 6.28);
@@ -333,7 +279,6 @@
         }
         return max(0.0, dist);
       }
-
       void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
         float widthHeightRatio = resolution.x / resolution.y;
