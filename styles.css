@@ -18,20 +18,20 @@ html, body {
   font-family: 'Marck Script', cursive, sans-serif;
 }
 
-/* Класс для анимации появления сверху вниз */
+/* Анимация появления сверху вниз */
 .fade-in {
   opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
+  animation: flowDown 1.5s ease-out forwards;
 }
 
-@keyframes fadeIn {
+@keyframes flowDown {
   from {
     opacity: 0;
-    transform: translateY(-20px); /* Элементы начинают выше на 20px */
+    transform: translateY(-30px); /* Стартовая позиция выше на 30px */
   }
   to {
     opacity: 1;
-    transform: translateY(0); /* Элементы опускаются на место */
+    transform: translateY(0); /* Конечная позиция */
   }
 }
 
@@ -39,26 +39,26 @@ html, body {
 .title {
   font-size: 6vw;
   text-align: center;
-  margin-bottom: 2vw;
+  margin: 2vw 0; /* Отступы для симметрии */
   word-wrap: break-word;
 }
 
+/* Задержки для последовательной анимации */
 .title:first-child {
-  animation-delay: 0.5s; /* Верхний текст появляется первым */
+  animation-delay: 0s; /* Верхний текст появляется сразу */
 }
 
-.title:last-child {
-  animation-delay: 1.5s; /* Нижний текст появляется последним */
-}
-
-/* Стили для сердца */
 .c-heart {
   position: relative;
   width: 40vw;
   height: 53.33vw;
   max-width: 250px;
   max-height: 333px;
-  animation-delay: 1s; /* Сердце появляется вторым */
+  animation-delay: 0.3s; /* Сердце появляется через 0.3s */
+}
+
+.title:last-child {
+  animation-delay: 0.6s; /* Нижний текст появляется через 0.6s */
 }
 
 /* Стили для тени */
@@ -91,25 +91,45 @@ html, body {
   background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
-/* Медиа-запросы для адаптивности */
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .title {
     font-size: 8vw;
-    margin-bottom: 3vw;
+    margin: 3vw 0;
   }
   .c-heart {
     width: 35vw;
     height: 46.67vw;
+  }
+  .shadow {
+    padding: 3vw;
   }
 }
 
 @media (max-width: 480px) {
   .title {
     font-size: 10vw;
-    margin-bottom: 4vw;
+    margin: 4vw 0;
   }
   .c-heart {
     width: 30vw;
     height: 40vw;
+  }
+  .shadow {
+    padding: 4vw;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 12vw;
+    margin: 5vw 0;
+  }
+  .c-heart {
+    width: 25vw;
+    height: 33.33vw;
+  }
+  .shadow {
+    padding: 5vw;
   }
 }
