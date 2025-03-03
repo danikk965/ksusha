@@ -1,4 +1,3 @@
-// Класс для рендеринга анимации сердца с помощью WebGL
 class HeartGLRender {
   static get DURATION() { return 10; }
 
