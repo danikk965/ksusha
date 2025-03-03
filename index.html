@@ -15,30 +15,37 @@
     html,
     body {
       display: flex;
-      flex-direction: column; /* Элементы располагаются вертикально */
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: 100vh; /* Полная высота экрана */
+      height: 100vh;
       overflow: hidden;
       color: white;
-      background-color: #000;
+      background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
       font-family: 'Marck Script', cursive, sans-serif;
+      position: relative;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .title {
-      font-size: 5vw; /* Адаптивный размер шрифта */
+      font-size: clamp(16px, 5vw, 40px); /* Минимальный размер 16px, максимальный 40px */
       text-align: center;
       width: 100%;
-      padding: 10px; /* Небольшой отступ для читаемости */
+      padding: 5px; /* Уменьшил отступы для компактности */
     }
 
     .c-heart {
-      position: relative; /* Убираем absolute, чтобы сердце адаптировалось */
-      width: 50vw; /* Относительная ширина */
-      height: 66.67vw; /* Пропорциональная высота */
-      max-width: 300px; /* Ограничение для больших экранов */
-      max-height: 400px;
+      position: relative;
+      width: clamp(100px, 50vw, 300px); /* Ограничил размеры сердца */
+      height: clamp(133px, 66.67vw, 400px);
       opacity: 1;
     }
 
@@ -76,48 +83,119 @@
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
 
+    /* Анимированные сердечки */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff69b4;
+      transform: rotate(45deg);
+      animation: float 6s infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff69b4;
+      border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+
     /* Медиа-запросы для адаптивности */
     @media (max-width: 768px) {
-      .title {
-        font-size: 4vw; /* Уменьшаем шрифт для планшетов */
-      }
-      .c-heart {
-        width: 40vw;
-        height: 53.33vw; /* Пропорционально уменьшаем сердце */
-      }
+      .title { font-size: clamp(14px, 4vw, 30px); }
+      .c-heart { width: clamp(80px, 40vw, 240px); height: clamp(106px, 53.33vw, 320px); }
     }
 
     @media (max-width: 480px) {
-      .title {
-        font-size: 3vw; /* Уменьшаем шрифт для телефонов */
-      }
-      .c-heart {
-        width: 30vw;
-        height: 40vw; /* Ещё меньше для маленьких экранов */
-      }
+      .title { font-size: clamp(12px, 3.5vw, 24px); padding: 3px; }
+      .c-heart { width: clamp(60px, 30vw, 180px); height: clamp(80px, 40vw, 240px); }
+    }
+
+    /* Слой для частиц */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
     }
   </style>
 </head>
 
 <body>
-  <!-- Заголовки и контейнер для сердца -->
-  <span class="title">C наступающим</span>
-  <div class="shadow">
-    <canvas class="c-heart" data-canvas="heart">8</canvas>
-    <span class="c-heart-alt">8</span>
-  </div>
-  <span class="title">мартом Ксюша!</span>
+  <!-- Слой для частиц -->
+  <div id="particles-js"></div>
 
-  <!-- Здесь твой JavaScript код остаётся без изменений -->
+  <!-- Основной контент -->
+  <div class="content">
+    <span class="title">C наступающим</span>
+    <div class="shadow">
+      <canvas class="c-heart" data-canvas="heart">8</canvas>
+      <span class="c-heart-alt">8</span>
+    </div>
+    <span class="title">мартом Ксюша!</span>
+
+    <!-- Анимированные сердечки -->
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- Подключение библиотеки particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    // Настройка частиц
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ff69b4" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": false },
+        "move": {
+          "enable": true,
+          "speed": 1,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": { "onhover": { "enable": false }, "onclick": { "enable": false } }
+      },
+      "retina_detect": true
+    });
+  </script>
+
   <script>
     // Класс для рендеринга анимации сердца с помощью WebGL
     class HeartGLRender {
       static get DURATION() { return 10; }
+
       constructor(el) {
         this.el = el;
-        if (!this.el) throw new Error('Элемент canvas не найден.');
+        if (!this.el) throw new Error('Элемент canvas не найден или не передан в конструктор.');
+
         this.gl = this.el.getContext("webgl") || this.el.getContext("experimental-webgl");
-        if (!this.gl) throw new Error('WebGL не поддерживается.');
+        if (!this.gl) throw new Error('WebGL не поддерживается вашим браузером или отключён.');
+
         this.vertexShader = HeartGLRender.compileShader(this.gl, VERTEX, this.gl.VERTEX_SHADER);
         this.fragmentShader = HeartGLRender.compileShader(this.gl, FRAGMENT, this.gl.FRAGMENT_SHADER);
         this.program = HeartGLRender.createProgram(this.gl, [this.vertexShader, this.fragmentShader]);
@@ -126,10 +204,12 @@
         this.heightHandler = this.gl.getUniformLocation(this.program, 'height');
         this.positionHandler = HeartGLRender.createPositionHandler(this.gl, this.program);
         this.timeHandler = this.gl.getUniformLocation(this.program, 'time');
+
         this.resize();
         this.redraw();
         this.el.parentNode.toggleAttribute('loaded', true);
       }
+
       resize() {
         const width = this.el.offsetWidth;
         const height = this.el.offsetHeight;
@@ -139,6 +219,7 @@
         this.gl.uniform1f(this.widthHandler, width);
         this.gl.uniform1f(this.heightHandler, height);
       }
+
       redraw() {
         const current = Date.now();
         const start = this.timeStart = this.timeStart || current;
@@ -147,6 +228,7 @@
         this.gl.uniform1f(this.timeHandler, this.time);
         this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
       }
+
       static compileShader(gl, shaderSource, shaderType) {
         const shader = gl.createShader(shaderType);
         gl.shaderSource(shader, shaderSource);
@@ -156,6 +238,7 @@
         }
         return shader;
       }
+
       static createProgram(gl, shaders = []) {
         const program = gl.createProgram();
         shaders.forEach((shader) => gl.attachShader(program, shader));
@@ -163,6 +246,7 @@
         gl.useProgram(program);
         return program;
       }
+
       static createBuffer(gl) {
         const bounds = new Float32Array([-1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, -1.0]);
         const buffer = gl.createBuffer();
@@ -170,50 +254,64 @@
         gl.bufferData(gl.ARRAY_BUFFER, bounds, gl.STATIC_DRAW);
         return buffer;
       }
+
       static createPositionHandler(gl, program) {
         const attributeLocation = gl.getAttribLocation(program, 'position');
-        if (attributeLocation === -1) throw new Error('Атрибут "position" не найден.');
+        if (attributeLocation === -1) throw new Error('Атрибут "position" не найден в шейдере.');
         gl.enableVertexAttribArray(attributeLocation);
         gl.vertexAttribPointer(attributeLocation, 2, gl.FLOAT, false, 2 * 4, 0);
         return attributeLocation;
       }
     }
+
     function ready(fn) {
       if (document.readyState !== 'loading') setTimeout(fn);
       else document.addEventListener('DOMContentLoaded', () => setTimeout(fn));
     }
+
     ready(() => {
       const targets = Array.from(document.querySelectorAll('[data-canvas="heart"]'));
       const handlers = targets.map(el => new HeartGLRender(el));
+
       function drawLoop() {
         handlers.forEach(h => h.redraw());
         requestAnimationFrame(drawLoop);
       }
       drawLoop();
+
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => handlers.forEach(h => h.resize()), 100);
+        resizeTimeout = setTimeout(() => {
+          handlers.forEach(h => h.resize());
+        }, 100);
       }, false);
     });
+
     const VERTEX = `
       attribute vec2 position;
       void main() {
         gl_Position = vec4(position, 0.0, 1.0);
       }
     `;
+
     const FRAGMENT = `
       precision highp float;
+
       uniform float time;
       uniform float width;
       uniform float height;
+
       vec2 resolution = vec2(width, height);
+
       #define POINT_COUNT 8
+
       vec2 points[POINT_COUNT];
       const float speed = -0.5;
       const float len = 0.3;
       float intensity = 1.5;
       float radius = 0.02;
+
       float sdBezier(vec2 pos, vec2 A, vec2 B, vec2 C){
         vec2 a = B - A;
         vec2 b = A - 2.0 * B + C;
@@ -256,15 +354,18 @@
         }
         return res;
       }
+
       vec2 getHeartPosition(float t) {
         return vec2(
           16.0 * sin(t) * sin(t) * sin(t),
           -(13.0 * cos(t) - 5.0 * cos(2.0 * t) - 2.0 * cos(3.0 * t) - cos(4.0 * t))
         );
       }
+
       float getGlow(float dist, float radius, float intensity) {
         return pow(radius / dist, intensity);
       }
+
       float getSegment(float t, vec2 pos, float offset, float scale){
         for (int i = 0; i < POINT_COUNT; i++){
           points[i] = getHeartPosition(offset + float(i) * len + fract(speed * t) * 6.28);
@@ -279,6 +380,7 @@
         }
         return max(0.0, dist);
       }
+
       void main() {
         vec2 uv = gl_FragCoord.xy / resolution.xy;
         float widthHeightRatio = resolution.x / resolution.y;
