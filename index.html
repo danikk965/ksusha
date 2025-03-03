@@ -12,40 +12,31 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       display: flex;
-      flex-direction: column;
+      flex-direction: column; /* Вертикальное расположение */
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: 100vh;
+      height: 100vh; /* Полная высота экрана */
       overflow: hidden;
       color: white;
-      background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      background-color: #000;
       font-family: 'Marck Script', cursive, sans-serif;
-      position: relative;
-    }
-
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .title {
-      font-size: clamp(16px, 5vw, 40px); /* Минимальный размер 16px, максимальный 40px */
+      font-size: 6vw; /* Базовый размер шрифта для адаптивности */
       text-align: center;
-      width: 100%;
-      padding: 5px; /* Уменьшил отступы для компактности */
+      padding: 5vw; /* Отступы для мобильных */
     }
 
     .c-heart {
       position: relative;
-      width: clamp(100px, 50vw, 300px); /* Ограничил размеры сердца */
-      height: clamp(133px, 66.67vw, 400px);
+      width: 40vw; /* Уменьшенный размер сердца */
+      height: 53.33vw; /* Пропорциональная высота */
+      max-width: 250px; /* Ограничение для больших экранов */
+      max-height: 333px;
       opacity: 1;
     }
 
@@ -64,6 +55,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
+      padding: 5vw; /* Дополнительные отступы */
     }
     .shadow::before,
     .shadow::after {
@@ -83,106 +75,50 @@
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
 
-    /* Анимированные сердечки */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #ff69b4;
-      transform: rotate(45deg);
-      animation: float 6s infinite;
-    }
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #ff69b4;
-      border-radius: 50%;
-    }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { top: 0; left: -10px; }
-
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
-    }
-
-    /* Медиа-запросы для адаптивности */
+    /* Медиа-запросы для телефонов */
     @media (max-width: 768px) {
-      .title { font-size: clamp(14px, 4vw, 30px); }
-      .c-heart { width: clamp(80px, 40vw, 240px); height: clamp(106px, 53.33vw, 320px); }
+      .title {
+        font-size: 8vw; /* Увеличенный шрифт для планшетов */
+      }
+      .c-heart {
+        width: 35vw; /* Уменьшаем сердце */
+        height: 46.67vw;
+      }
     }
 
     @media (max-width: 480px) {
-      .title { font-size: clamp(12px, 3.5vw, 24px); padding: 3px; }
-      .c-heart { width: clamp(60px, 30vw, 180px); height: clamp(80px, 40vw, 240px); }
+      .title {
+        font-size: 10vw; /* Ещё больше шрифт для маленьких экранов */
+        padding: 8vw; /* Увеличенные отступы */
+      }
+      .c-heart {
+        width: 30vw; /* Ещё меньше сердце */
+        height: 40vw;
+      }
+      .shadow {
+        padding: 8vw; /* Больше пространства вокруг сердца */
+      }
     }
 
-    /* Слой для частиц */
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-    .content {
-      position: relative;
-      z-index: 2;
+    @media (max-width: 360px) {
+      .title {
+        font-size: 12vw; /* Максимальный размер для очень маленьких экранов */
+      }
+      .c-heart {
+        width: 25vw;
+        height: 33.33vw;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Слой для частиц -->
-  <div id="particles-js"></div>
-
-  <!-- Основной контент -->
-  <div class="content">
-    <span class="title">C наступающим</span>
-    <div class="shadow">
-      <canvas class="c-heart" data-canvas="heart">8</canvas>
-      <span class="c-heart-alt">8</span>
-    </div>
-    <span class="title">мартом Ксюша!</span>
-
-    <!-- Анимированные сердечки -->
-    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
-    <div class="heart" style="left: 30%; animation-delay: 2s;"></div>
-    <div class="heart" style="left: 50%; animation-delay: 4s;"></div>
-    <div class="heart" style="left: 70%; animation-delay: 1s;"></div>
-    <div class="heart" style="left: 90%; animation-delay: 3s;"></div>
+  <span class="title">C наступающим</span>
+  <div class="shadow">
+    <canvas class="c-heart" data-canvas="heart">8</canvas>
+    <span class="c-heart-alt">8</span>
   </div>
-
-  <!-- Подключение библиотеки particles.js -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    // Настройка частиц
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ff69b4" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.5, "random": true },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": false },
-        "move": {
-          "enable": true,
-          "speed": 1,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out"
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": false }, "onclick": { "enable": false } }
-      },
-      "retina_detect": true
-    });
-  </script>
+  <span class="title">мартом Ксюша!</span>
 
   <script>
     // Класс для рендеринга анимации сердца с помощью WebGL
@@ -192,7 +128,6 @@
       constructor(el) {
         this.el = el;
         if (!this.el) throw new Error('Элемент canvas не найден или не передан в конструктор.');
-
         this.gl = this.el.getContext("webgl") || this.el.getContext("experimental-webgl");
         if (!this.gl) throw new Error('WebGL не поддерживается вашим браузером или отключён.');
 
@@ -282,9 +217,7 @@
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          handlers.forEach(h => h.resize());
-        }, 100);
+        resizeTimeout = setTimeout(() => handlers.forEach(h => h.resize()), 100);
       }, false);
     });
 
@@ -297,15 +230,11 @@
 
     const FRAGMENT = `
       precision highp float;
-
       uniform float time;
       uniform float width;
       uniform float height;
-
       vec2 resolution = vec2(width, height);
-
       #define POINT_COUNT 8
-
       vec2 points[POINT_COUNT];
       const float speed = -0.5;
       const float len = 0.3;
@@ -416,4 +345,4 @@
     `;
   </script>
 </body>
-  </html>
+</html>
