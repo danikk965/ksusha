@@ -16,41 +16,45 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   width: 100%;
-  height: 100vh; /* Используем 100vh вместо 100% */
+  height: 100vh;
   overflow: hidden;
   color: white;
   background-color: #000;
-  background-repeat: no-repeat;
   font-family: 'Marck Script', cursive, sans-serif;
   text-align: center;
 }
 
 /* Заголовок */
 .title {
-  font-size: 4em; /* Уменьшаем размер */
+  font-size: 4em;
+  margin: 10px 0;
 }
 
-/* Сердце */
-.c-heart {
-  position: absolute;
-  width: 80vw; /* Адаптивная ширина */
-  max-width: 300px; /* Ограничиваем максимальный размер */
-  height: auto; /* Автоматическая высота */
-  opacity: 1;
-}
-[loaded] .c-heart {
+/* Контейнер для сердца */
+.shadow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
   position: relative;
+}
+
+/* Сердце (Canvas) */
+.c-heart {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  max-height: 250px;
 }
 
 /* Альтернативное сердце */
 .c-heart-alt {
-  font-size: 6em; /* Уменьшаем размер */
+  font-size: 6em;
   color: #ff7171;
-  margin: 0 0.2em;
-}
-[loaded] .c-heart-alt {
   display: none;
 }
 
@@ -59,8 +63,12 @@ html, body {
   .title {
     font-size: 3em;
   }
+  .shadow {
+    max-width: 200px;
+  }
   .c-heart {
-    width: 60vw;
+    max-width: 180px;
+    max-height: 180px;
   }
   .c-heart-alt {
     font-size: 5em;
@@ -393,4 +401,4 @@ html, body {
     `;
   </script>
 </body>
-  </html>
+</html>
