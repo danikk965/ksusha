@@ -103,7 +103,7 @@
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
 
-    /* Стили для кнопки */
+    /* Обновлённые стили для кнопки */
     .button {
       background-color: transparent;
       color: white;
@@ -112,12 +112,25 @@
       text-decoration: none;
       font-size: 16px;
       margin-top: 20px;
-      transition: background-color 0.3s, color 0.3s;
+      opacity: 0;
+      transition: all 0.3s ease;
+      animation: fadeIn 1s ease-in-out 0.9s forwards;
+      border-radius: 5px;
     }
 
     .button:hover {
-      background-color: white;
-      color: black;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 0.7;
+      }
     }
 
     /* Адаптивность для мобильных устройств */
@@ -133,6 +146,10 @@
       .shadow {
         padding: 3vw;
       }
+      .button {
+        font-size: 18px;
+        padding: 12px 24px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -146,6 +163,10 @@
       }
       .shadow {
         padding: 4vw;
+      }
+      .button {
+        font-size: 20px;
+        padding: 14px 28px;
       }
     }
 
@@ -161,6 +182,10 @@
       .shadow {
         padding: 5vw;
       }
+      .button {
+        font-size: 22px;
+        padding: 16px 32px;
+      }
     }
   </style>
 </head>
@@ -170,7 +195,7 @@
     <canvas class="c-heart fade-in" data-canvas="heart"></canvas>
   </div>
   <span class="title fade-in">мартом Ксюша!</span>
-  <a href="https://example.com" class="button">Нажми сюда</a>
+  <a href="another-index.html" class="button">Нажми сюда</a>
 
   <!-- Твой JavaScript для анимации сердца -->
   <script>
@@ -394,5 +419,5 @@
       }
     `;
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91abf85e2c80ed7e',t:'MTc0MTAzNDY0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
