@@ -22,7 +22,7 @@
       height: 100vh;
       overflow: hidden;
       color: white;
-      background-color: #000;
+      background-color: #1a000d; /* Черный с розовым оттенком */
       font-family: 'Marck Script', cursive, sans-serif;
     }
 
@@ -35,11 +35,11 @@
     @keyframes flowDown {
       from {
         opacity: 0;
-        transform: translateY(-30px); /* Стартовая позиция выше на 30px */
+        transform: translateY(-30px);
       }
       to {
         opacity: 1;
-        transform: translateY(0); /* Конечная позиция */
+        transform: translateY(0);
       }
     }
 
@@ -47,13 +47,13 @@
     .title {
       font-size: 6vw;
       text-align: center;
-      margin: 2vw 0; /* Отступы для симметрии */
+      margin: 3vw 0; /* Увеличил отступы для баланса */
       word-wrap: break-word;
     }
 
     /* Задержки для последовательной анимации */
     .title:first-child {
-      animation-delay: 0s; /* Верхний текст появляется сразу */
+      animation-delay: 0s;
     }
 
     .c-heart {
@@ -62,11 +62,11 @@
       height: 53.33vw;
       max-width: 250px;
       max-height: 333px;
-      animation-delay: 0.3s; /* Сердце появляется через 0.3s */
+      animation-delay: 0.3s;
     }
 
     .title:last-child {
-      animation-delay: 0.6s; /* Нижний текст появляется через 0.6s */
+      animation-delay: 0.6s;
     }
 
     /* Стили для тени */
@@ -99,11 +99,72 @@
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
 
+    /* Кнопка "Нажми сюда" */
+    .surprise-button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 3vw;
+      margin-top: 3vw;
+      transition: background-color 0.3s;
+    }
+
+    .surprise-button:hover {
+      background-color: #ff1493;
+    }
+
+    /* Скрытый текст сюрприза */
+    #surprise {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      font-size: 4vw;
+      z-index: 10;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    /* Кнопка закрытия */
+    .close-button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 2.5vw;
+    }
+
+    .close-button:hover {
+      background-color: #ff1493;
+    }
+
     /* Адаптивность для мобильных устройств */
     @media (max-width: 768px) {
       .title {
         font-size: 8vw;
-        margin: 3vw 0;
+        margin: 4vw 0;
       }
       .c-heart {
         width: 35vw;
@@ -112,12 +173,22 @@
       .shadow {
         padding: 3vw;
       }
+      .surprise-button {
+        font-size: 5vw;
+        padding: 8px 16px;
+      }
+      #surprise {
+        font-size: 6vw;
+      }
+      .close-button {
+        font-size: 4vw;
+      }
     }
 
     @media (max-width: 480px) {
       .title {
         font-size: 10vw;
-        margin: 4vw 0;
+        margin: 5vw 0;
       }
       .c-heart {
         width: 30vw;
@@ -126,12 +197,23 @@
       .shadow {
         padding: 4vw;
       }
+      .surprise-button {
+        font-size: 6vw;
+        padding: 6px 12px;
+      }
+      #surprise {
+        font-size: 7vw;
+        padding: 15px;
+      }
+      .close-button {
+        font-size: 5vw;
+      }
     }
 
     @media (max-width: 360px) {
       .title {
         font-size: 12vw;
-        margin: 5vw 0;
+        margin: 6vw 0;
       }
       .c-heart {
         width: 25vw;
@@ -139,6 +221,17 @@
       }
       .shadow {
         padding: 5vw;
+      }
+      .surprise-button {
+        font-size: 7vw;
+        padding: 5px 10px;
+      }
+      #surprise {
+        font-size: 8vw;
+        padding: 10px;
+      }
+      .close-button {
+        font-size: 6vw;
       }
     }
   </style>
@@ -149,6 +242,11 @@
     <canvas class="c-heart fade-in" data-canvas="heart"></canvas>
   </div>
   <span class="title fade-in">мартом Ксюша!</span>
+  <button class="surprise-button" onclick="showSurprise()">Нажми сюда</button>
+  <div id="surprise">
+    <p>Ксюша, ты — мой самый светлый человек! Желаю тебе счастья, любви и весны в душе!</p>
+    <button class="close-button" onclick="hideSurprise()">Закрыть</button>
+  </div>
   <script>
     class HeartGLRender {
       static get DURATION() { return 10; }
@@ -369,7 +467,15 @@
         gl_FragColor = vec4(col,1.0);
       }
     `;
+
+    // Функции для показа и скрытия сюрприза
+    function showSurprise() {
+      document.getElementById('surprise').style.display = 'block';
+    }
+
+    function hideSurprise() {
+      document.getElementById('surprise').style.display = 'none';
+    }
   </script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91ab443ededa4532',t:'MTc0MTAyNzI3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
