@@ -1,0 +1,31 @@
+.button {
+    display: inline-block; /* Чтобы кнопка вела себя как ссылка с правильными размерами */
+    background-color: transparent; /* Прозрачный фон */
+    color: #ff6945; /* Цвет текста в градиенте, как у заголовка */
+    border: 1px solid #ff6945; /* Граница в цвете градиента */
+    padding: 10px 20px; /* Внутренние отступы */
+    text-decoration: none; /* Убираем подчёркивание ссылки */
+    font-size: 25px; /* Размер текста */
+    font-family: 'Caveat', cursive; /* Тот же шрифт, что и у текста */
+    opacity: 0; /* Начальная прозрачность для анимации */
+    transition: all 0.3s ease; /* Плавный переход для всех изменений */
+    animation: fadeIn 1s ease-in-out 2.5s forwards; /* Анимация появления */
+    border-radius: 5px; /* Закруглённые углы */
+    box-shadow: 0 0 10px rgba(255, 105, 69, 0.5); /* Тень в цвете градиента */
+}
+
+.button:hover {
+    opacity: 1; /* Полная непрозрачность при наведении */
+    color: #fff; /* Белый текст */
+    background-color: rgba(255, 105, 69, 0.8); /* Полупрозрачный фон при наведении */
+    box-shadow: 0 0 15px rgba(255, 105, 69, 0.8); /* Усиленная тень */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Начальная прозрачность */
+    }
+    to {
+        opacity: 0.7; /* Полупрозрачность после появления */
+    }
+}
