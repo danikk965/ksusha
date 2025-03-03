@@ -22,7 +22,11 @@
       height: 100vh;
       overflow: hidden;
       color: white;
-      background-color: #000;
+      background: radial-gradient(circle at top left, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at top right, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at bottom left, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.1), transparent 50%),
+                  #000;
       font-family: 'Marck Script', cursive, sans-serif;
     }
 
@@ -35,11 +39,11 @@
     @keyframes flowDown {
       from {
         opacity: 0;
-        transform: translateY(-30px); /* Стартовая позиция выше на 30px */
+        transform: translateY(-30px);
       }
       to {
         opacity: 1;
-        transform: translateY(0); /* Конечная позиция */
+        transform: translateY(0);
       }
     }
 
@@ -47,13 +51,13 @@
     .title {
       font-size: 6vw;
       text-align: center;
-      margin: 2vw 0; /* Отступы для симметрии */
+      margin: 2vw 0;
       word-wrap: break-word;
     }
 
     /* Задержки для последовательной анимации */
     .title:first-child {
-      animation-delay: 0s; /* Верхний текст появляется сразу */
+      animation-delay: 0s;
     }
 
     .c-heart {
@@ -62,11 +66,11 @@
       height: 53.33vw;
       max-width: 250px;
       max-height: 333px;
-      animation-delay: 0.3s; /* Сердце появляется через 0.3s */
+      animation-delay: 0.3s;
     }
 
     .title:last-child {
-      animation-delay: 0.6s; /* Нижний текст появляется через 0.6s */
+      animation-delay: 0.6s;
     }
 
     /* Стили для тени */
@@ -97,6 +101,23 @@
     .shadow::after {
       right: 0;
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
+    }
+
+    /* Стили для кнопки */
+    .button {
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .button:hover {
+      background-color: white;
+      color: black;
     }
 
     /* Адаптивность для мобильных устройств */
@@ -149,6 +170,9 @@
     <canvas class="c-heart fade-in" data-canvas="heart"></canvas>
   </div>
   <span class="title fade-in">мартом Ксюша!</span>
+  <a href="https://example.com" class="button">Нажми сюда</a>
+
+  <!-- Твой JavaScript для анимации сердца -->
   <script>
     class HeartGLRender {
       static get DURATION() { return 10; }
@@ -370,6 +394,5 @@
       }
     `;
   </script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91ab443ededa4532',t:'MTc0MTAyNzI3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
