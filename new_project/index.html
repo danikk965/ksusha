@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Анимированное сердце</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Подключение шрифта Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
   <style>
     /* Сброс стилей и базовая настройка */
@@ -104,7 +103,7 @@
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
 
-    /* Стили для кнопки */
+    /* Обновлённые стили для кнопки */
     .button {
       background-color: transparent;
       color: white;
@@ -196,11 +195,9 @@
     <canvas class="c-heart fade-in" data-canvas="heart"></canvas>
   </div>
   <span class="title fade-in">мартом Ксюша!</span>
-  <!-- Подключение изображения JPG -->
-  <img src="image.jpg" alt="Изображение" style="margin-top: 20px;">
-  <a href="another-page.html" class="button">Нажми сюда</a>
+  <a href="another-index.html" class="button">Нажми сюда</a>
 
-  <!-- Встроенный JavaScript для анимации сердца -->
+  <!-- Твой JavaScript для анимации сердца -->
   <script>
     class HeartGLRender {
       static get DURATION() { return 10; }
@@ -422,5 +419,5 @@
       }
     `;
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91abf85e2c80ed7e',t:'MTc0MTAzNDY0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
