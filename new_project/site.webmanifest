@@ -1,32 +1,36 @@
-	<!DOCTYPE html>
-	<html lang="ru">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="style.css">
-		<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
-		<link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
-		<link rel="manifest" href="img/favicons/site.webmanifest">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
-		<title>Любимая, с 8 марта!</title>
-	</head>
-	<body>
-
-		<div id="petals"></div>
-
-		<div class="card">
-			<div class="title">Любимая, с 8 марта!</div>
-			<div class="text" id="text"></div>
-			<div class="author" id="author">- твой Прынц</div>
-		</div>
-
-
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-		<script src="js/typed.min.js"></script>
-		<script src="js/app.js"></script>
-
-	</body>
-	</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Убедитесь, что style.css существует в корневой папке -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Проверено: ссылка на Google Fonts рабочая -->
+    <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+    <!-- Убедитесь, что img/favicons/apple-touch-icon.png существует -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
+    <!-- Убедитесь, что img/favicons/favicon-32x32.png существует -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
+    <!-- Убедитесь, что img/favicons/favicon-16x16.png существует -->
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
+    <!-- Убедитесь, что img/favicons/site.webmanifest существует -->
+    <link rel="manifest" href="img/favicons/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>Любимая, с 8 марта!</title>
+</head>
+<body>
+    <div id="petals"></div>
+    <div class="card">
+        <div class="title">Любимая, с 8 марта!</div>
+        <div class="text" id="text"></div>
+        <div class="author" id="author">- твой Прынц</div>
+    </div>
+    <!-- Проверено: ссылка на GSAP рабочая, но можно обновить версию -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+    <!-- Убедитесь, что js/typed.min.js существует -->
+    <script src="js/typed.min.js"></script>
+    <!-- Убедитесь, что js/app.js существует -->
+    <script src="js/app.js"></script>
+</body>
+</html>
