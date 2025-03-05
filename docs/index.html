@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
   <style>
-    /* Сброс стилей и базовая настройка */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       display: flex;
@@ -24,8 +23,6 @@
                   #000;
       font-family: 'Marck Script', cursive, sans-serif;
     }
-
-    /* Анимация появления сверху вниз */
     .fade-in {
       opacity: 0;
       animation: flowDown 1.5s ease-out forwards;
@@ -34,16 +31,12 @@
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* Стили для текста */
     .title {
       font-size: 6vw;
       text-align: center;
       margin: 2vw 0;
       word-wrap: break-word;
     }
-
-    /* Задержки для последовательной анимации */
     .title:first-child { animation-delay: 0s; }
     .c-heart {
       position: relative;
@@ -52,10 +45,13 @@
       max-width: 250px;
       max-height: 333px;
       animation-delay: 0.3s;
+      background: radial-gradient(circle at top left, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at top right, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at bottom left, rgba(255, 0, 255, 0.1), transparent 50%),
+                  radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.1), transparent 50%),
+                  #000;
     }
     .title:last-child { animation-delay: 0.6s; }
-
-    /* Стили для тени */
     .shadow {
       position: relative;
       display: flex;
@@ -80,49 +76,44 @@
       right: 0;
       background: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
     }
-
-    /* Стили для кнопки */
     .button {
-      background-color: transparent;
+      background-color: rgba(255, 0, 255, 0.2);
       color: white;
-      border: 1px solid white;
-      padding: 10px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 15px 30px;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 20px;
       margin-top: 20px;
       opacity: 0;
       transition: all 0.3s ease;
       animation: fadeIn 1s ease-in-out 0.9s forwards;
-      border-radius: 5px;
+      border-radius: 20px;
     }
     .button:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 0, 255, 0.4);
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
     }
     @keyframes fadeIn {
       from { opacity: 0; }
-      to { opacity: 1; } /* Изменено на 1 для полной видимости */
+      to { opacity: 1; }
     }
-
-    /* Адаптивность для мобильных устройств */
     @media (max-width: 768px) {
       .title { font-size: 8vw; margin: 3vw 0; }
       .c-heart { width: 35vw; height: 46.67vw; }
       .shadow { padding: 3vw; }
-      .button { font-size: 18px; padding: 12px 24px; }
+      .button { font-size: 22px; padding: 16px 32px; }
     }
     @media (max-width: 480px) {
       .title { font-size: 10vw; margin: 4vw 0; }
       .c-heart { width: 30vw; height: 40vw; }
       .shadow { padding: 4vw; }
-      .button { font-size: 20px; padding: 14px 28px; }
+      .button { font-size: 24px; padding: 18px 36px; }
     }
     @media (max-width: 360px) {
       .title { font-size: 12vw; margin: 5vw 0; }
       .c-heart { width: 25vw; height: 33.33vw; }
       .shadow { padding: 5vw; }
-      .button { font-size: 22px; padding: 16px 32px; }
+      .button { font-size: 26px; padding: 20px 40px; }
     }
   </style>
 </head>
@@ -134,7 +125,6 @@
   <span class="title fade-in">мартом Ксюша!</span>
   <a href="congratulations.html" class="button">Нажми сюда</a>
 
-  <!-- JavaScript для анимации сердца -->
   <script>
     class HeartGLRender {
       static get DURATION() { return 10; }
@@ -345,8 +335,8 @@
       }
     `;
   </script>
-  <!-- Скрипты Cloudflare (оставлены без изменений) -->
   <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91abf85e2c80ed7e',t:'MTc0MTAzNDY0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
   <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91b8af6cbe28bd08',t:'MTc0MTE2Nzk3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91bb181c9eddbfb6',t:'MTc0MTE5MzIzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
