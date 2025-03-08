@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Анимированное сердце</title>
+  <title>Animated Heart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
   <style>
@@ -123,16 +123,16 @@
     <canvas class="c-heart fade-in" data-canvas="heart"></canvas>
   </div>
   <span class="title fade-in">мартом Ксюша!</span>
-  <a href="congratulations.html" class="button">Нажми сюда</a>
+  <a href="congratulations.html" class="button">Нажми меня</a>
 
   <script>
     class HeartGLRender {
       static get DURATION() { return 10; }
       constructor(el) {
         this.el = el;
-        if (!this.el) throw new Error('Элемент canvas не найден или не передан в конструктор.');
+        if (!this.el) throw new Error('Canvas element not found or not passed to constructor.');
         this.gl = this.el.getContext("webgl") || this.el.getContext("experimental-webgl");
-        if (!this.gl) throw new Error('WebGL не поддерживается вашим браузером или отключён.');
+        if (!this.gl) throw new Error('WebGL is not supported by your browser or is disabled.');
         this.vertexShader = HeartGLRender.compileShader(this.gl, VERTEX, this.gl.VERTEX_SHADER);
         this.fragmentShader = HeartGLRender.compileShader(this.gl, FRAGMENT, this.gl.FRAGMENT_SHADER);
         this.program = HeartGLRender.createProgram(this.gl, [this.vertexShader, this.fragmentShader]);
@@ -167,7 +167,7 @@
         gl.shaderSource(shader, shaderSource);
         gl.compileShader(shader);
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-          throw new Error('Ошибка компиляции шейдера: ' + gl.getShaderInfoLog(shader));
+          throw new Error('Shader compilation error: ' + gl.getShaderInfoLog(shader));
         }
         return shader;
       }
@@ -187,7 +187,7 @@
       }
       static createPositionHandler(gl, program) {
         const attributeLocation = gl.getAttribLocation(program, 'position');
-        if (attributeLocation === -1) throw new Error('Атрибут "position" не найден в шейдере.');
+        if (attributeLocation === -1) throw new Error('Attribute "position" not found in shader.');
         gl.enableVertexAttribArray(attributeLocation);
         gl.vertexAttribPointer(attributeLocation, 2, gl.FLOAT, false, 2 * 4, 0);
         return attributeLocation;
@@ -335,8 +335,5 @@
       }
     `;
   </script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91abf85e2c80ed7e',t:'MTc0MTAzNDY0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91b8af6cbe28bd08',t:'MTc0MTE2Nzk3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91bb181c9eddbfb6',t:'MTc0MTE5MzIzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
